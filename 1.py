@@ -1,22 +1,22 @@
 import heapq
+import os
 
-from input_parser import InputParser
-
-input = InputParser.parse_input('1.in', int)
-
-calories_blocks = []
-for block in input:
-    heapq.heappush(calories_blocks, (-sum(block), block))
-
-def n_largest_sum(n):
-    largest_calories_blocks = heapq.nsmallest(n, calories_blocks)
-    return sum([-block_sum for block_sum, _ in largest_calories_blocks])
+def parse_input():
+    with open(f'inputs/1.in', 'r') as f:
+        content = f.read()
+        splitted_by_empty_lines = content.split(os.linesep + os.linesep)
+        raw_calories_blocks = list(map(lambda block: block.split(os.linesep), splitted_by_empty_lines))
+        return list(map(lambda block: list(map(int, block)), raw_calories_blocks))
 
 def first_part():
-    return n_largest_sum(1)
+    return -sum(heapq.nsmallest(1, calories_blocks))
 
 def second_part():
-    return n_largest_sum(3)
+    return -sum(heapq.nsmallest(3, calories_blocks))
+
+calories_blocks = []
+for block in parse_input():
+    heapq.heappush(calories_blocks, -sum(block))
 
 print(first_part())
 print(second_part())
