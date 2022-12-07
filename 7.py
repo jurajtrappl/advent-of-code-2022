@@ -18,7 +18,7 @@ class Node:
     Collection of directed edges between directory and its contents.
     """
     name: str
-    edges: list['Node'] = field(default_factory=list)
+    content: list['Node'] = field(default_factory=list)
     parent: 'Node' = None
 
 @dataclass
@@ -80,11 +80,12 @@ def assemble_filesystem(program: Program) -> FileSystem:
     """
     Returns an adjacency list of a graph representing ownership of directories and files.
     """
-    dirs, current_dir = [], None
-    for command in program:
+    root_dir = Directory(name=ROOT_DIR)
+    dirs, current_dir = [root_dir], root_dir
+    for command in program[1:]:
         if command.name == CommandName.LIST.value:
             for o in command.output:
-                current_dir.edges.append(o)
+                current_dir.content.append(o)
                 o.parent = current_dir
 
                 if isinstance(o, Directory):
@@ -94,12 +95,7 @@ def assemble_filesystem(program: Program) -> FileSystem:
             if command.arg == PARENT_DIR:
                 current_dir = current_dir.parent
             else:
-                if not current_dir:
-                    current_dir = Directory(name=command.arg)
-                    dirs.append(current_dir)
-                    continue
-                
-                new_dir = [child_dir for child_dir in current_dir.edges if child_dir.name == command.arg][0]
+                new_dir = [child_dir for child_dir in current_dir.content if child_dir.name == command.arg][0]
                 current_dir = new_dir
 
     return dirs
@@ -112,10 +108,10 @@ def calculate_dir_size(dir):
     while q:
         current_dir = q.pop()
 
-        child_files = list(filter(lambda item: isinstance(item, File), current_dir.edges))
+        child_files = list(filter(lambda item: isinstance(item, File), current_dir.content))
         size += sum([f.size for f in child_files])
         
-        child_dirs = list(filter(lambda item: isinstance(item, Directory), current_dir.edges))
+        child_dirs = list(filter(lambda item: isinstance(item, Directory), current_dir.content))
         q.extend(child_dirs)
 
     return size
