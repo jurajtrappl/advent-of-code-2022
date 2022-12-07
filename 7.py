@@ -108,7 +108,7 @@ def calculate_dir_size(dir):
     while q:
         current_dir = q.pop()
 
-        child_files = list(filter(lambda item: isinstance(item, File), current_dir.content))
+        child_files = filter(lambda item: isinstance(item, File), current_dir.content)
         size += sum([f.size for f in child_files])
         
         child_dirs = list(filter(lambda item: isinstance(item, Directory), current_dir.content))
@@ -117,10 +117,10 @@ def calculate_dir_size(dir):
     return size
 
 def first_part(sizes):
-    return sum(filter(lambda size: size <= FIRST_PART_AT_MOST_SPACE, sizes))
+    return sum(sizes[sizes <= FIRST_PART_AT_MOST_SPACE])
 
 def second_part(sizes):
-    unused_space = TOTAL_SPACE - sizes[-1]
+    unused_space = TOTAL_SPACE - sizes[-1]  # the last one is root dir
     space_to_delete = UPDATE_SPACE - unused_space
 
     return sizes[np.argmax(sizes >= space_to_delete)]
