@@ -14,9 +14,6 @@ class CommandName(Enum):
 
 @dataclass
 class Node:
-    """
-    Collection of directed edges between directory and its contents.
-    """
     name: str
     content: list['Node'] = field(default_factory=list)
     parent: 'Node' = None
@@ -62,7 +59,7 @@ Program = list[Command]
 def parse_input() -> Program:
     def parse_program(content) -> Program:
         """
-        Returns a collection of commands.    
+        Returns a collection of commands with their output together.
         """
         commands = []
         for line in content:
@@ -100,7 +97,7 @@ def assemble_filesystem(program: Program) -> FileSystem:
 
     return dirs
 
-def calculate_dir_size(dir):
+def calculate_dir_size(dir): 
     """
     Performs BFS without checking for already seen nodes because it is a tree-like structure.
     """
