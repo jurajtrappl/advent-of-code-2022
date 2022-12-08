@@ -2,13 +2,6 @@ from collections import deque, namedtuple
 import numpy as np
 import os
 
-"""
-DISCLAIMER:
-
-Today's input is a bit harder to parse.
-Since this is a free time activity for me and I dont have so much free time right now, I decided to parse it specifically for this input.
-"""
-
 NUM_OF_STACKS = 9
 CRATES_INDICES = [i for i in range(1, 35, 4)]
 CraneCommand = namedtuple('CraneCommand', ['count', 'start', 'end'])
