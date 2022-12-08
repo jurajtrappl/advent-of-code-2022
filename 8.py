@@ -21,9 +21,9 @@ def is_tree_visible(row, col):
 
 def scenic_score(row, col):
     def view_distance(tree_row, tree_height):
-        for i, tree_height_in_view in enumerate(tree_row):
+        for distance, tree_height_in_view in enumerate(tree_row):
             if tree_height_in_view >= tree_height:
-                return i + 1
+                return distance + 1
 
         return len(tree_row)
 
