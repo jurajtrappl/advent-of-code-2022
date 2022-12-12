@@ -3,11 +3,13 @@ from enum import Enum
 from functools import reduce
 import math
 
+
 class Direction(Enum):
     R = (1, 0)
     D = (0, -1)
     L = (-1, 0)
     U = (0, 1)
+
 
 @dataclass
 class Position:
@@ -23,6 +25,7 @@ class Position:
     def __hash__(self) -> int:
         return hash(self.x) + hash(self.y)
 
+
 def parse_input():
     def get_head_movement(command_line: str) -> list[Position]:
         direction, n_steps = command_line.split()
@@ -31,9 +34,11 @@ def parse_input():
     with open('inputs/9.in', 'r') as f:
         return reduce(list.__add__, list(map(get_head_movement, f.read().splitlines())))
 
+
 def is_head_far(head: Position, tail: Position) -> bool:
     dx, dy = abs(tail.x - head.x), abs(tail.y - head.y)
-    return not(0 <= dx <= 1 and 0 <= dy <= 1)
+    return not (0 <= dx <= 1 and 0 <= dy <= 1)
+
 
 def move(direction: Position) -> Position:
     new_x, new_y = direction.x / 2, direction.y / 2
@@ -41,9 +46,11 @@ def move(direction: Position) -> Position:
     new_y = math.ceil(new_y) if new_y > 0 else math.floor(new_y)
     return Position(new_x, new_y)
 
+
 def model_head_positions():
     head_moves, head_pos = parse_input(), Position(0, 0)
-    return [head_pos:=head_pos + move for move in head_moves]
+    return [head_pos := head_pos + move for move in head_moves]
+
 
 def model_knots_positions(tail_length: int) -> int:
     rope_parts_positions = [Position(0, 0)] * (tail_length + 1)
@@ -56,9 +63,10 @@ def model_knots_positions(tail_length: int) -> int:
                 rope_parts_positions[i] += move(direction=head - tail)
 
         tail_visited_positions.add(rope_parts_positions[-1])
-    
+
     tail_visited_positions.add(rope_parts_positions[-1])
     return len(tail_visited_positions)
+
 
 print(model_knots_positions(tail_length=1))
 print(model_knots_positions(tail_length=9))

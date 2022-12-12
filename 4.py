@@ -9,11 +9,14 @@ def parse_input():
     with open('inputs/4.in', 'r') as f:
         return list(map(parse_pair, f.read().splitlines()))
 
+
 def first_part(input):
     return sum([fst_elf <= snd_elf or snd_elf <= fst_elf for fst_elf, snd_elf in input])
 
+
 def second_part(input):
     return sum([fst_elf & snd_elf != set() for fst_elf, snd_elf in input])
+
 
 input = parse_input()
 print(first_part(input))
