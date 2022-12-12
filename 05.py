@@ -25,9 +25,8 @@ def parse_input():
         splitted = list(map(str.split, commands))
         return [CraneCommand(int(count), int(start), int(end)) for _, count, _, start, _, end in splitted]
 
-    with open('inputs/5.in', 'r') as f:
-        content = f.read()
-        raw_crates, raw_crane_commands = content.split(os.linesep + os.linesep)
+    with open('inputs/05.in', 'r') as f:
+        raw_crates, raw_crane_commands = f.read().split(os.linesep + os.linesep)
         return parse_stacks_of_crates(raw_crates), parse_commands(raw_crane_commands)
 
 

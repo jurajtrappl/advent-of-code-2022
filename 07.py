@@ -78,7 +78,7 @@ def parse_input() -> Program:
 
         return commands
 
-    with open('inputs/7.in', 'r') as f:
+    with open('inputs/07.in', 'r') as f:
         return parse_program(f.read().splitlines())
 
 

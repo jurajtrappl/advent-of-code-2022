@@ -2,7 +2,7 @@ import numpy as np
 
 
 def parse_input():
-    with open('inputs/8.in', 'r') as f:
+    with open('inputs/08.in', 'r') as f:
         return np.array([list(map(int, list(line))) for line in f.read().splitlines()])
 
 

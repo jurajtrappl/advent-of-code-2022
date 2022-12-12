@@ -26,7 +26,7 @@ win_handshapes = dict([(v, k) for k, v in loss_handshapes.items()])
 
 
 def parse_input():
-    with open('inputs/2.in', 'r') as f:
+    with open('inputs/02.in', 'r') as f:
         content = f.read().splitlines()
         splitted = list(map(str.split, content))
         return splitted

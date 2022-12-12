@@ -2,7 +2,7 @@ import numpy as np
 
 
 def parse_input():
-    with open('inputs/3.in', 'r') as f:
+    with open('inputs/03.in', 'r') as f:
         return f.read().splitlines()
 
 

@@ -31,7 +31,7 @@ def parse_input():
         direction, n_steps = command_line.split()
         return [Position(*Direction[direction].value)] * int(n_steps)
 
-    with open('inputs/9.in', 'r') as f:
+    with open('inputs/09.in', 'r') as f:
         return reduce(list.__add__, list(map(get_head_movement, f.read().splitlines())))
 
 

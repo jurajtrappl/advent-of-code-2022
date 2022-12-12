@@ -6,7 +6,7 @@ def parse_input():
     def parse_pair(elf_pair):
         return [parse_section_assignment(elf) for elf in elf_pair.split(',')]
 
-    with open('inputs/4.in', 'r') as f:
+    with open('inputs/04.in', 'r') as f:
         return list(map(parse_pair, f.read().splitlines()))
 
 

@@ -1,9 +1,8 @@
 import heapq
 import os
 
-
 def parse_input():
-    with open(f'inputs/1.in', 'r') as f:
+    with open(f'inputs/01.in', 'r') as f:
         content = f.read()
         splitted_by_empty_lines = content.split(os.linesep + os.linesep)
         raw_calories_chunks = list(map(lambda chunk: chunk.split(os.linesep), splitted_by_empty_lines))

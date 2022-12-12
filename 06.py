@@ -7,7 +7,7 @@ MarkerPosition = int
 
 
 def parse_input() -> DatastreamBuffer:
-    with open('inputs/6.in', 'r') as f:
+    with open('inputs/06.in', 'r') as f:
         return f.read()
 
 
